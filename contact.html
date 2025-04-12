@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Contact Form || Zulkaif Riaz</title>
     <meta name="robots" content="index, follow" />
-    <meta name="description" content="">
+    <meta name="description" content="Zulkaif Riaz">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <!-- Favicon -->
@@ -54,7 +54,7 @@
                         <!-- Start Mainmanu Nav -->
                         <nav class="main-menu-navbar">
                             <ul class="mainmenu">
-                                <li>
+                                <li class="has-droupdown">
                                     <a href="index.html">Home</a> 
                                 </li>
                                 <li>
@@ -130,21 +130,23 @@
                                     </p>
                                 </div>
                                 <div class="form-wrapper">
-                                    <form action="https://formspree.io/f/xkgjyblz" method="POST">
-    <label>
-        <input type="text" name="name" placeholder="Your Name *" required>
-    </label>
-    <label>
-        <input type="email" name="email" placeholder="Your Email *" required>
-    </label>
-    <label>
-        <input type="text" name="subject" placeholder="Subject">
-    </label>
-    <label>
-        <textarea name="message" placeholder="Your Message *" required></textarea>
-    </label>
-    <button class="rn-button-style--2 btn_solid" type="submit">Submit</button>
-</form>
+                                    <form action="mail.php" method="POST">
+                                        <label>
+                                            <input type="text" name="name" id="item01" placeholder="Your Name *" />
+                                        </label>
+
+                                        <label>
+                                            <input type="text" name="email" id="item02" placeholder="Your email *">
+                                        </label>
+
+                                        <label>
+                                            <input type="text" name="subject" id="item03" placeholder="Write a Subject">
+                                        </label>
+                                        <label>
+                                            <textarea id="item04" name="message" placeholder="Your Message"></textarea>
+                                        </label>
+                                        <button class="rn-button-style--2 btn_solid" type="submit" value="submit" name="submit" id="mc-embedded-subscribe">Submit</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-lg-6 order-1 order-lg-2">
@@ -199,17 +201,16 @@
 
                                         <div class="social-share-inner">
                                             <ul class="social-share social-style--2 d-flex justify-content-start liststyle mt--15">
-                                                <li><a href="https://medium.com/@zulkaifriaz"><i class="fab fa-medium-m"></i></a></li>
-                                                <li><a href="https://www.linkedin.com/in/zulkaifriaz"><i class="fab fa-linkedin-in"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                                                 <li>
-                <a href="https://x.com/zulkaif_riaz">
+                <a href="#">
                     <svg width="16" height="16" viewBox="0 0 512 512" fill="currentColor" aria-hidden="true" style="vertical-align: -0.125em;">
                         <path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/>
                     </svg>
                 </a>
             </li>
-                                                <li><a href="https://www.instagram.com/zulkaifriaz/"><i class="fab fa-instagram"></i></a></li>
-<li><a href="https://scholar.google.com/citations?user=TImPdisAAAAJ"><i class="fas fa-graduation-cap"></i></a></li>
+                                                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
