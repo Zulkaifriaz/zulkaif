@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (siteLogo) {
             siteLogo.src = isDark 
                 ? 'assets/images/logo/logo-light.png' 
-                : 'assets/images/logo/logo-all-dark.png';
+                : 'assets/images/logo/logox.jpg';
         }
     }
 
