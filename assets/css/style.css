@@ -17495,3 +17495,21 @@ a.purchase-btn:hover {
   }
 }
 /*# sourceMappingURL=../maps/style.css.map */
+#site-logo {
+  height: 32px;
+  width: auto;
+  max-width: none;
+  transition: height 0.3s ease;
+}
+
+/* Sticky header */
+.header--sticky.sticky #site-logo {
+  height: 28px;
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  #site-logo {
+    height: 26px;
+  }
+}
