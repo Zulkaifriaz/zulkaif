@@ -1,181 +1,297 @@
-<!doctype html>
-<html class="no-js" lang="en">
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>BasicSeo Plugin || Zulkaif Riaz</title>
-    <meta name="robots" content="index, follow" />
-    <meta name="description" content="BasicSeo - Manual SEO file manager for WordPress. Generate sitemaps, robots.txt, ads.txt, and more with full control.">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/plugins/plugins.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BasicSEO – Manual SEO File Manager for WordPress</title>
+  <meta name="description" content="Lightweight WordPress plugin for full control over sitemaps, robots.txt, ads.txt. Manual, transparent, no silent automation."/>
+  
+  <!-- Google Fonts: Modern sans-serif -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --text: #1f2937;
+      --text-light: #4b5563;
+      --bg: #f9fafb;
+      --card: #ffffff;
+      --border: #e5e7eb;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--bg);
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    
+    header {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+    }
+    .btn-outline:hover { background: var(--primary); color: white; }
+    
+    .hero {
+      text-align: center;
+      padding: 6rem 0 4rem;
+      background: linear-gradient(to bottom, #eff6ff, #f9fafb);
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      line-height: 1.1;
+    }
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-light);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+    }
+    
+    section { padding: 5rem 0; }
+    h2 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+    }
+    .icon {
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 1.25rem;
+    }
+    .feature-card h3 { font-size: 1.5rem; margin-bottom: 1rem; }
+    
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .screenshot {
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    }
+    .screenshot img { width: 100%; height: auto; display: block; }
+    
+    .faq details {
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+    .faq summary {
+      padding: 1.25rem 1.5rem;
+      font-weight: 600;
+      background: #f1f5f9;
+      cursor: pointer;
+    }
+    .faq p { padding: 0 1.5rem 1.5rem; }
+    
+    .cta {
+      text-align: center;
+      background: var(--primary);
+      color: white;
+      padding: 6rem 0 4rem;
+      border-radius: 1rem;
+      margin: 3rem 0;
+    }
+    .cta h2 { color: white; }
+    .cta-buttons { margin-top: 2rem; display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; }
+    
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      color: var(--text-light);
+      border-top: 1px solid var(--border);
+    }
+    
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .cta-buttons { flex-direction: column; }
+    }
+  </style>
 </head>
-
 <body>
-<div class="main-page">
 
-    <!-- Header -->
-    <header class="header-area formobile-menu header--transparent black-logo-version">
-        <div class="header-wrapper">
-            <div class="header-left">
-                <div class="logo">
-                    <a href="/">
-                        <img src="assets/images/logo/logo-all-dark.png" alt="Zulkaif Logo">
-                    </a>
-                </div>
-            </div>
+  <header>
+    <div class="container">
+      <nav class="nav">
+        <div class="logo">BasicSEO</div>
+        <a href="https://github.com/zulkaifriaz/basicseo" target="_blank" class="btn btn-outline">View on GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Manual SEO File Manager for WordPress</h1>
+      <p>Full control over sitemaps, robots.txt, ads.txt and more – transparent, no silent automation, built with WordPress standards.</p>
+      <div>
+        <a href="https://github.com/zulkaifriaz/basicseo" target="_blank" class="btn btn-primary" style="font-size:1.2rem;">Download BasicSEO</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="container">
+      <h2>Key Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="icon"><i class="fas fa-sitemap"></i></div>
+          <h3>Manual Sitemap Generation</h3>
+          <p>Create XML sitemaps with full control. Choose content types, preview before live, excludes noindex automatically.</p>
         </div>
-    </header>
-
-    <!-- Page Content -->
-    <main class="page-wrapper">
-
-        <!-- Hero Section -->
-        <div class="rn-contact-area rn-section-gap bg_color--1">
-            <div class="container">
-                <div class="row row--35 align-items-center">
-                    <div class="col-lg-6">
-                        <div class="section-title text-start mb--50">
-                            <h1 class="title" style="color: #FF0000;">BasicSeo</h1>
-                            <p class="description">
-                                A lightweight, manual SEO file manager for WordPress. Generate and control sitemaps, robots.txt, ads.txt, and other essential SEO files with **full transparency** and no silent automation.
-                            </p>
-                            <a href="https://github.com/zulkaifriaz/basicseo" class="rn-button-style--2 btn_solid" target="_blank">
-                                View Source on GitHub
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Placeholder for hero image -->
-                        <img src="assets/images/plugins/basicseo-hero.png" alt="BasicSeo Plugin Screenshot" class="img-fluid">
-                    </div>
-                </div>
-            </div>
+        <div class="feature-card">
+          <div class="icon"><i class="fas fa-robot"></i></div>
+          <h3>Robots.txt Management</h3>
+          <p>Safely edit rules, live preview, auto sitemap inclusion, detects physical files & conflicts.</p>
         </div>
-
-        <!-- Key Features -->
-        <div class="rn-contact-area rn-section-gap bg_color--2">
-            <div class="container">
-                <div class="section-title text-center mb--50">
-                    <h2 class="title">Key Features</h2>
-                </div>
-                <div class="row row--35">
-                    <div class="col-lg-4">
-                        <div class="feature-box">
-                            <h4>Manual Sitemap Generation</h4>
-                            <p>Create XML sitemaps with full control over included content and preview before going live.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="feature-box">
-                            <h4>Robots.txt Management</h4>
-                            <p>Edit and preview robots.txt safely without overriding WordPress core.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="feature-box">
-                            <h4>Ads.txt Editor</h4>
-                            <p>Manage advertising declarations via entry-based or raw editing with validation.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row row--35 mt--30">
-                    <div class="col-lg-4">
-                        <div class="feature-box">
-                            <h4>Conflict Detection</h4>
-                            <p>Alerts you to potential conflicts with other SEO plugins to avoid issues.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="feature-box">
-                            <h4>No Silent Automation</h4>
-                            <p>All actions require explicit user approval. No changes are made without your consent.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="feature-box">
-                            <h4>WordPress Native</h4>
-                            <p>Built using WordPress APIs and coding standards, respecting existing plugins and files.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="feature-card">
+          <div class="icon"><i class="fas fa-ad"></i></div>
+          <h3>Ads.txt Editor</h3>
+          <p>Entry-based or raw editing, validation, physical file creation or virtual fallback.</p>
         </div>
-
-        <!-- Installation Section -->
-        <div class="rn-contact-area rn-section-gap bg_color--1">
-            <div class="container">
-                <div class="section-title text-center mb--50">
-                    <h2 class="title">Installation</h2>
-                </div>
-                <ol class="installation-steps">
-                    <li>Upload the <code>basicseo</code> folder to <code>/wp-content/plugins/</code></li>
-                    <li>Activate the plugin through the 'Plugins' menu in WordPress</li>
-                    <li>Navigate to <strong>BasicSeo</strong> in your WordPress admin menu</li>
-                    <li>Configure settings and generate your sitemap</li>
-                </ol>
-            </div>
+        <div class="feature-card">
+          <div class="icon"><i class="fas fa-shield-alt"></i></div>
+          <h3>Conflict Detection</h3>
+          <p>Alerts for issues with other SEO plugins – respects existing files.</p>
         </div>
-
-        <!-- Screenshots -->
-        <div class="rn-contact-area rn-section-gap bg_color--2">
-            <div class="container">
-                <div class="section-title text-center mb--50">
-                    <h2 class="title">Screenshots</h2>
-                </div>
-                <div class="row row--35">
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <img src="assets/images/plugins/screenshot-1.png" alt="Sitemap Dashboard" class="img-fluid">
-                        <p class="text-center">Sitemap Dashboard</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <img src="assets/images/plugins/screenshot-2.png" alt="Robots.txt Editor" class="img-fluid">
-                        <p class="text-center">Robots.txt Editor</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <img src="assets/images/plugins/screenshot-3.png" alt="Ads.txt Manager" class="img-fluid">
-                        <p class="text-center">Ads.txt Manager</p>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <img src="assets/images/plugins/screenshot-4.png" alt="Advanced Settings" class="img-fluid">
-                        <p class="text-center">Advanced Settings</p>
-                    </div>
-                </div>
-            </div>
+        <div class="feature-card">
+          <div class="icon"><i class="fas fa-hand-paper"></i></div>
+          <h3>No Silent Automation</h3>
+          <p>Every action requires your explicit approval – full transparency.</p>
         </div>
-
-        <!-- Call-to-Action -->
-        <div class="rn-contact-area rn-section-gap bg_color--1 text-center">
-            <h3>Get BasicSeo Now!</h3>
-            <a href="https://github.com/zulkaifriaz/basicseo" class="rn-button-style--2 btn_solid" target="_blank">
-                Download on GitHub
-            </a>
+        <div class="feature-card">
+          <div class="icon"><i class="fab fa-wordpress-simple"></i></div>
+          <h3>WordPress Native</h3>
+          <p>Uses core APIs and coding standards – lightweight & reliable.</p>
         </div>
+      </div>
+    </div>
+  </section>
 
-    </main>
+  <section id="installation" style="background:#f1f5f9;">
+    <div class="container">
+      <h2>Installation in 4 Steps</h2>
+      <ol style="max-width:700px; margin:0 auto; font-size:1.15rem; line-height:2;">
+        <li>Upload the <code>basicseo</code> folder to <code>/wp-content/plugins/</code></li>
+        <li>Activate the plugin through the Plugins menu in WordPress</li>
+        <li>Navigate to <strong>BasicSEO</strong> in your admin menu</li>
+        <li>Configure settings and generate your files</li>
+      </ol>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer-area footer-default">
-        <div class="footer-wrapper">
-            <div class="copyright-text text-center">
-                <p>Copyright © 2026 Zulkaif Riaz. All Rights Reserved.</p>
-            </div>
+  <section id="screenshots">
+    <div class="container">
+      <h2>Screenshots</h2>
+      <div class="screenshots-grid">
+        <div class="screenshot">
+          <img src="https://via.placeholder.com/800x500.png?text=Sitemap+Dashboard" alt="BasicSeo Sitemaps dashboard">
         </div>
-    </footer>
+        <div class="screenshot">
+          <img src="https://via.placeholder.com/800x500.png?text=Create+Custom+Sitemaps" alt="Create Custom Sitemaps">
+        </div>
+        <div class="screenshot">
+          <img src="https://via.placeholder.com/800x500.png?text=Advanced+Settings" alt="Advanced Settings">
+        </div>
+        <!-- Add more if you have (readme mentions 3) -->
+      </div>
+    </div>
+  </section>
 
-</div>
+  <section id="faq" style="background:#f1f5f9;">
+    <div class="container">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq">
+        <details>
+          <summary>Does BasicSeo automatically update my sitemap?</summary>
+          <p>No. BasicSeo is fully manual. You control when sitemaps are generated or updated.</p>
+        </details>
+        <details>
+          <summary>Can I use this alongside other SEO plugins?</summary>
+          <p>Yes. BasicSeo detects potential conflicts and alerts you. It is designed to respect existing files.</p>
+        </details>
+        <details>
+          <summary>What if my robots.txt or ads.txt directory is not writable?</summary>
+          <p>The plugin provides a virtual fallback so your rules still apply even if physical file creation fails.</p>
+        </details>
+      </div>
+    </div>
+  </section>
 
-<!-- JS -->
-<script src="assets/js/vendor/modernizr.min.js"></script>
-<script src="assets/js/vendor/jquery.js"></script>
-<script src="assets/js/vendor/bootstrap.min.js"></script>
-<script src="assets/js/plugins/plugins.js"></script>
-<script src="assets/js/main.js"></script>
+  <section class="cta">
+    <div class="container">
+      <h2>Ready for Full Control?</h2>
+      <p>Install BasicSEO today and take charge of your SEO files – manually, safely, transparently.</p>
+      <div class="cta-buttons">
+        <a href="https://github.com/zulkaifriaz/basicseo" target="_blank" class="btn btn-primary" style="font-size:1.3rem; padding:1rem 2.5rem;">Download on GitHub</a>
+        <a href="https://zulkaif.com" class="btn btn-outline" style="background:white; color:var(--primary);">Back to zulkaif.com</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>BasicSEO by <a href="https://zulkaif.com" style="color:var(--primary);">Zulkaif Riaz</a> • GPLv3 • Support: <a href="mailto:mail@zulkaif.com">mail@zulkaif.com</a></p>
+    </div>
+  </footer>
 
 </body>
 </html>
