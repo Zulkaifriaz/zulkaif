@@ -1,0 +1,181 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>BasicSeo Plugin || Zulkaif Riaz</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="BasicSeo - Manual SEO file manager for WordPress. Generate sitemaps, robots.txt, ads.txt, and more with full control.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/vendor/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/plugins/plugins.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+<div class="main-page">
+
+    <!-- Header -->
+    <header class="header-area formobile-menu header--transparent black-logo-version">
+        <div class="header-wrapper">
+            <div class="header-left">
+                <div class="logo">
+                    <a href="/">
+                        <img src="assets/images/logo/logo-all-dark.png" alt="Zulkaif Logo">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Content -->
+    <main class="page-wrapper">
+
+        <!-- Hero Section -->
+        <div class="rn-contact-area rn-section-gap bg_color--1">
+            <div class="container">
+                <div class="row row--35 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="section-title text-start mb--50">
+                            <h1 class="title" style="color: #FF0000;">BasicSeo</h1>
+                            <p class="description">
+                                A lightweight, manual SEO file manager for WordPress. Generate and control sitemaps, robots.txt, ads.txt, and other essential SEO files with **full transparency** and no silent automation.
+                            </p>
+                            <a href="https://github.com/zulkaifriaz/basicseo" class="rn-button-style--2 btn_solid" target="_blank">
+                                View Source on GitHub
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!-- Placeholder for hero image -->
+                        <img src="assets/images/plugins/basicseo-hero.png" alt="BasicSeo Plugin Screenshot" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="rn-contact-area rn-section-gap bg_color--2">
+            <div class="container">
+                <div class="section-title text-center mb--50">
+                    <h2 class="title">Key Features</h2>
+                </div>
+                <div class="row row--35">
+                    <div class="col-lg-4">
+                        <div class="feature-box">
+                            <h4>Manual Sitemap Generation</h4>
+                            <p>Create XML sitemaps with full control over included content and preview before going live.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature-box">
+                            <h4>Robots.txt Management</h4>
+                            <p>Edit and preview robots.txt safely without overriding WordPress core.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature-box">
+                            <h4>Ads.txt Editor</h4>
+                            <p>Manage advertising declarations via entry-based or raw editing with validation.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row row--35 mt--30">
+                    <div class="col-lg-4">
+                        <div class="feature-box">
+                            <h4>Conflict Detection</h4>
+                            <p>Alerts you to potential conflicts with other SEO plugins to avoid issues.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature-box">
+                            <h4>No Silent Automation</h4>
+                            <p>All actions require explicit user approval. No changes are made without your consent.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="feature-box">
+                            <h4>WordPress Native</h4>
+                            <p>Built using WordPress APIs and coding standards, respecting existing plugins and files.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Installation Section -->
+        <div class="rn-contact-area rn-section-gap bg_color--1">
+            <div class="container">
+                <div class="section-title text-center mb--50">
+                    <h2 class="title">Installation</h2>
+                </div>
+                <ol class="installation-steps">
+                    <li>Upload the <code>basicseo</code> folder to <code>/wp-content/plugins/</code></li>
+                    <li>Activate the plugin through the 'Plugins' menu in WordPress</li>
+                    <li>Navigate to <strong>BasicSeo</strong> in your WordPress admin menu</li>
+                    <li>Configure settings and generate your sitemap</li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Screenshots -->
+        <div class="rn-contact-area rn-section-gap bg_color--2">
+            <div class="container">
+                <div class="section-title text-center mb--50">
+                    <h2 class="title">Screenshots</h2>
+                </div>
+                <div class="row row--35">
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <img src="assets/images/plugins/screenshot-1.png" alt="Sitemap Dashboard" class="img-fluid">
+                        <p class="text-center">Sitemap Dashboard</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <img src="assets/images/plugins/screenshot-2.png" alt="Robots.txt Editor" class="img-fluid">
+                        <p class="text-center">Robots.txt Editor</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <img src="assets/images/plugins/screenshot-3.png" alt="Ads.txt Manager" class="img-fluid">
+                        <p class="text-center">Ads.txt Manager</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <img src="assets/images/plugins/screenshot-4.png" alt="Advanced Settings" class="img-fluid">
+                        <p class="text-center">Advanced Settings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call-to-Action -->
+        <div class="rn-contact-area rn-section-gap bg_color--1 text-center">
+            <h3>Get BasicSeo Now!</h3>
+            <a href="https://github.com/zulkaifriaz/basicseo" class="rn-button-style--2 btn_solid" target="_blank">
+                Download on GitHub
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-area footer-default">
+        <div class="footer-wrapper">
+            <div class="copyright-text text-center">
+                <p>Copyright © 2026 Zulkaif Riaz. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- JS -->
+<script src="assets/js/vendor/modernizr.min.js"></script>
+<script src="assets/js/vendor/jquery.js"></script>
+<script src="assets/js/vendor/bootstrap.min.js"></script>
+<script src="assets/js/plugins/plugins.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
