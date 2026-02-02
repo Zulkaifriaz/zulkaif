@@ -20,9 +20,67 @@
     <link rel="stylesheet" href="assets/css/vendor/lightbox.css">
     <link rel="stylesheet" href="assets/css/plugins/plugins.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <!-- Force dark mode colors -->
+    <style>
+        body {
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        h1, h2, h3, h4, h5, h6,
+        .title, .section-title h2,
+        p, a:not(.rn-btn), li, span:not(.menutrigger i),
+        .breadcrumb-inner .title,
+        .footer-widget h4,
+        .copyright-text p {
+            color: #ffffff !important;
+        }
+
+        /* Links */
+        a {
+            color: #ffffff;
+        }
+        a:hover {
+            color: #cccccc;
+        }
+
+        /* Form inputs & placeholders */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            background-color: #111111;
+            color: #ffffff;
+            border: 1px solid #555555 !important;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #aaaaaa !important;
+            opacity: 1 !important;
+        }
+
+        input:focus,
+        textarea:focus {
+            border-color: #777777 !important;
+            outline: none;
+        }
+
+        /* Remove any leftover light mode / switcher influence */
+        .my_switcher, #my_switcher {
+            display: none !important;
+        }
+
+        /* Breadcrumb & sections background */
+        .breadcrumb-area,
+        .rn-contact-area,
+        .footer-area {
+            background-color: #000000 !important;
+        }
+    </style>
 </head>
 
-<body style="background-color: #000000; color: #e0e0e0;">
+<body>
 
     <div class="main-page">
 
@@ -71,7 +129,7 @@
         </header>
 
         <!-- Breadcrumb -->
-        <div class="breadcrumb-area ptb--120" style="background-color: #000000;">
+        <div class="breadcrumb-area ptb--120">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -90,7 +148,7 @@
         <!-- Main Content -->
         <main class="page-wrapper">
 
-            <div class="rn-contact-area rn-section-gap" style="background-color: #000000;">
+            <div class="rn-contact-area rn-section-gap">
                 <div class="contact-form--1">
                     <div class="container">
                         <div class="row row--35 align-items-start">
@@ -104,10 +162,10 @@
                                 </div>
                                 <div class="form-wrapper">
                                     <form action="https://formspree.io/f/xkgjyblz" method="POST">
-                                        <label><input type="text" name="name" id="item01" placeholder="Your Name *" required></label>
-                                        <label><input type="email" name="email" id="item02" placeholder="Your email *" required></label>
-                                        <label><input type="text" name="subject" id="item03" placeholder="Write a Subject"></label>
-                                        <label><textarea name="message" id="item04" placeholder="Your Message"></textarea></label>
+                                        <label><input type="text"     name="name"    id="item01" placeholder="Your Name *"    required></label>
+                                        <label><input type="email"    name="email"   id="item02" placeholder="Your email *"   required></label>
+                                        <label><input type="text"     name="subject" id="item03" placeholder="Write a Subject"></label>
+                                        <label><textarea              name="message" id="item04" placeholder="Your Message" rows="6"></textarea></label>
                                         
                                         <div class="cf-turnstile" data-sitekey="0x4AAAAAACHdoA8LnEaU1WCO"></div>
                                         <input type="hidden" name="cf-turnstile-response">
@@ -132,7 +190,7 @@
         </main>
 
         <!-- Footer -->
-        <footer class="footer-area footer-default" style="background-color: #000000;">
+        <footer class="footer-area footer-default">
             <div class="footer-wrapper">
                 <div class="row align-items-end row--0">
                     <div class="col-lg-6">
@@ -194,7 +252,7 @@
 
     </div>
 
-    <!-- Scripts (removed style switcher / cookie related ones) -->
+    <!-- Scripts -->
     <script src="assets/js/vendor/modernizr.min.js"></script>
     <script src="assets/js/vendor/jquery.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
