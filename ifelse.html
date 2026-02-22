@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IfElse Pages – Coming Soon & Maintenance Mode Plugin for WordPress</title>
+<meta name="description" content="A lightweight WordPress plugin to display Coming Soon, Maintenance, or Landing Page screens to visitors while you work on your site.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+/* ===== IFELSE PAGES – HOMEPAGE STYLES (ifelse-home-v1) ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #0c0c10;
+  --paper: #f5f2ec;
+  --accent: #e8442a;
+  --accent2: #f5a623;
+  --muted: #8a8882;
+  --border: #dddad3;
+  --card-bg: #ffffff;
+  --code-bg: #1a1a22;
+  --code-fg: #a8e6cf;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Fraunces', Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ─── NOISE OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.4;
+}
+
+/* ─── NAV ─── */
+.ifelse-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: rgba(245,242,236,0.88);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.ifelse-nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.ifelse-nav-logo span.logo-if { color: var(--accent); }
+.ifelse-nav-logo span.logo-else { color: var(--ink); }
+
+.ifelse-nav-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  background: var(--accent);
+  color: white;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  letter-spacing: 0.05em;
+}
+
+.ifelse-nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  align-items: center;
+}
+
+.ifelse-nav-links a {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.ifelse-nav-links a:hover { color: var(--ink); }
+
+.ifelse-nav-cta {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: white !important;
+  background: var(--ink);
+  padding: 0.5rem 1.2rem;
+  border-radius: 3px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: background 0.2s, transform 0.15s;
+}
+.ifelse-nav-cta:hover { background: var(--accent) !important; transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.ifelse-hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ifelse-hero-left {
+  padding: 8rem 3rem 6rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+}
+
+.ifelse-hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ifelse-hero-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.ifelse-hero-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin-bottom: 2rem;
+}
+
+.ifelse-hero-title em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent);
+}
+
+.ifelse-hero-desc {
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: #555;
+  max-width: 460px;
+  margin-bottom: 3rem;
+  line-height: 1.75;
+}
+
+.ifelse-hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ifelse-btn-primary {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: var(--accent);
+  color: white;
+  padding: 0.9rem 2rem;
+  border-radius: 3px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ifelse-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(232,68,42,0.35); }
+
+.ifelse-btn-secondary {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  padding: 0.9rem 2rem;
+  border-radius: 3px;
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.ifelse-btn-secondary:hover { background: var(--ink); color: white; transform: translateY(-2px); }
+
+.ifelse-hero-meta {
+  margin-top: 3rem;
+  display: flex;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.ifelse-hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.ifelse-hero-stat strong {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.ifelse-hero-stat span {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ─── HERO RIGHT (BROWSER MOCKUP) ─── */
+.ifelse-hero-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 3rem 6rem 1rem;
+  position: relative;
+}
+
+.ifelse-hero-right::before {
+  content: '';
+  position: absolute;
+  right: -10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(232,68,42,0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ifelse-mockup {
+  width: 100%;
+  max-width: 540px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.15), 0 0 0 1px rgba(0,0,0,0.06);
+  overflow: hidden;
+  animation: ifelse-float 5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes ifelse-float {
+  0%, 100% { transform: translateY(0) rotate(-0.5deg); }
+  50% { transform: translateY(-12px) rotate(0.5deg); }
+}
+
+.ifelse-mockup-bar {
+  background: #f0ede8;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.ifelse-mockup-dot {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+}
+.ifelse-mockup-dot:nth-child(1) { background: #ff5f57; }
+.ifelse-mockup-dot:nth-child(2) { background: #ffbc2e; }
+.ifelse-mockup-dot:nth-child(3) { background: #28c840; }
+
+.ifelse-mockup-url {
+  flex: 1;
+  background: white;
+  border-radius: 4px;
+  padding: 0.3rem 0.8rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-left: 0.75rem;
+  border: 1px solid var(--border);
+}
+
+.ifelse-mockup-screen {
+  background: #1a1a22;
+  min-height: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.ifelse-mockup-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(232,68,42,0.2) 0%, transparent 60%);
+}
+
+.ifelse-mockup-screen-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  color: white;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ifelse-mockup-screen-logo span { color: var(--accent); }
+
+.ifelse-mockup-screen-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 0.75rem;
+  position: relative;
+  z-index: 1;
+  line-height: 1.2;
+}
+
+.ifelse-mockup-screen-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ifelse-mockup-countdown {
+  display: flex;
+  gap: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.ifelse-mockup-count-block {
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 6px;
+  padding: 0.6rem 0.8rem;
+  min-width: 60px;
+  text-align: center;
+}
+
+.ifelse-mockup-count-num {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: white;
+  display: block;
+  line-height: 1;
+}
+
+.ifelse-mockup-count-lbl {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.ifelse-mode-tabs {
+  display: flex;
+  gap: 0;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.ifelse-mode-tab {
+  flex: 1;
+  padding: 0.75rem;
+  text-align: center;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  cursor: pointer;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.2s, color 0.2s;
+  background: transparent;
+  border-bottom: none;
+  border-left: none;
+  border-top: none;
+}
+.ifelse-mode-tab:last-child { border-right: none; }
+.ifelse-mode-tab.active { color: var(--accent); background: rgba(232,68,42,0.1); }
+
+/* ─── DIAGONAL DIVIDER ─── */
+.ifelse-divider {
+  height: 80px;
+  background: var(--ink);
+  clip-path: polygon(0 0, 100% 0, 100% 40%, 0 100%);
+  margin-bottom: -2px;
+}
+
+/* ─── FEATURES ─── */
+.ifelse-features {
+  background: var(--ink);
+  color: white;
+  padding: 6rem 3rem;
+}
+
+.ifelse-section-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.ifelse-features-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 4rem;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.ifelse-features-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  max-width: 520px;
+}
+
+.ifelse-features-title em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent2);
+}
+
+.ifelse-features-sub {
+  max-width: 340px;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  font-weight: 300;
+}
+
+.ifelse-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5px;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.08);
+}
+
+.ifelse-feature-card {
+  background: var(--ink);
+  padding: 2.5rem;
+  transition: background 0.3s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.ifelse-feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+
+.ifelse-feature-card:hover { background: rgba(255,255,255,0.04); }
+.ifelse-feature-card:hover::before { transform: scaleX(1); }
+
+.ifelse-feature-icon {
+  width: 44px;
+  height: 44px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ifelse-feature-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ifelse-feature-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+}
+
+.ifelse-feature-desc {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  font-weight: 300;
+  font-family: 'Fraunces', serif;
+}
+
+/* ─── MODES SECTION ─── */
+.ifelse-modes {
+  padding: 8rem 3rem;
+  background: var(--paper);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.ifelse-modes-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ifelse-modes-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.03em;
+  margin-bottom: 1rem;
+}
+
+.ifelse-modes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+
+.ifelse-mode-card {
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.25s, box-shadow 0.25s;
+  background: white;
+}
+
+.ifelse-mode-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+
+.ifelse-mode-card-top {
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.ifelse-mode-card-top.coming-soon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.ifelse-mode-card-top.maintenance {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+}
+
+.ifelse-mode-card-top.landing {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: white;
+}
+
+.ifelse-mode-card-top .mode-badge {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  font-style: normal;
+  background: rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ifelse-mode-card-body {
+  padding: 1.75rem;
+}
+
+.ifelse-mode-card-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.ifelse-mode-card-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.65;
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+}
+
+.ifelse-mode-card-tag {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--paper);
+  padding: 0.25rem 0.6rem;
+  border-radius: 2px;
+  color: var(--muted);
+}
+
+/* ─── INSTALL ─── */
+.ifelse-install {
+  background: var(--ink);
+  color: white;
+  padding: 6rem 3rem;
+  clip-path: polygon(0 40px, 100% 0, 100% calc(100% - 40px), 0 100%);
+  margin: 3rem 0;
+}
+
+.ifelse-install-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+  padding: 3rem 0;
+}
+
+.ifelse-install-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  line-height: 1;
+}
+
+.ifelse-install-title em {
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-weight: 300;
+  color: var(--accent2);
+}
+
+.ifelse-install-steps {
+  list-style: none;
+  counter-reset: steps;
+}
+
+.ifelse-install-step {
+  counter-increment: steps;
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.ifelse-install-step::before {
+  content: counter(steps, decimal-leading-zero);
+  font-family: 'DM Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  letter-spacing: 0.05em;
+}
+
+.ifelse-install-step-text {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.6;
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+}
+
+.ifelse-install-step-text strong {
+  color: white;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+}
+
+.ifelse-code-block {
+  background: #0f0f15;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ifelse-code-header {
+  background: rgba(255,255,255,0.05);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.ifelse-code-header span {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ifelse-code-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+}
+.ifelse-code-dot:nth-child(1) { background: #ff5f57; }
+.ifelse-code-dot:nth-child(2) { background: #ffbc2e; }
+.ifelse-code-dot:nth-child(3) { background: #28c840; }
+
+.ifelse-code-body {
+  padding: 1.5rem 1.25rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.82rem;
+  line-height: 1.9;
+}
+
+.ifelse-code-line { display: flex; gap: 1rem; }
+.ifelse-code-num { color: rgba(255,255,255,0.2); min-width: 1.5rem; text-align: right; user-select: none; }
+.ifelse-code-text { color: var(--code-fg); }
+.ifelse-code-text .c-comment { color: rgba(255,255,255,0.3); }
+.ifelse-code-text .c-key { color: #86e1fc; }
+.ifelse-code-text .c-val { color: #f5a623; }
+.ifelse-code-text .c-path { color: #c3e88d; }
+.ifelse-code-text .c-nav { color: #ff9b82; }
+
+/* ─── FAQ ─── */
+.ifelse-faq {
+  padding: 6rem 3rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ifelse-faq-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.03em;
+  margin-bottom: 3rem;
+}
+
+.ifelse-faq-list {
+  display: grid;
+  gap: 0;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.ifelse-faq-item {
+  border-bottom: 1.5px solid var(--border);
+  background: white;
+}
+.ifelse-faq-item:last-child { border-bottom: none; }
+
+.ifelse-faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--ink);
+  text-align: left;
+  transition: background 0.2s;
+  gap: 1rem;
+}
+.ifelse-faq-question:hover { background: var(--paper); }
+
+.ifelse-faq-question .faq-icon {
+  width: 24px; height: 24px;
+  border: 1.5px solid var(--border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.25s, background 0.25s, border-color 0.25s;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.ifelse-faq-question.open .faq-icon {
+  transform: rotate(45deg);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+
+.ifelse-faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s;
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.75;
+  padding: 0 2rem;
+}
+
+.ifelse-faq-answer.open {
+  max-height: 300px;
+  padding: 0 2rem 1.5rem;
+}
+
+/* ─── FOOTER ─── */
+.ifelse-footer {
+  background: var(--ink);
+  color: white;
+  padding: 5rem 3rem 2.5rem;
+}
+
+.ifelse-footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.ifelse-footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 4rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.ifelse-footer-brand h2 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+}
+
+.ifelse-footer-brand h2 span { color: var(--accent); }
+
+.ifelse-footer-brand p {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.5);
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+.ifelse-footer-col h4 {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 1.25rem;
+}
+
+.ifelse-footer-col ul { list-style: none; }
+.ifelse-footer-col ul li { margin-bottom: 0.75rem; }
+.ifelse-footer-col ul a {
+  font-family: 'Fraunces', serif;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ifelse-footer-col ul a:hover { color: white; }
+
+.ifelse-footer-bottom {
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.ifelse-footer-bottom p {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.04em;
+}
+
+.ifelse-footer-bottom a {
+  color: rgba(255,255,255,0.5);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.ifelse-footer-bottom a:hover { color: white; }
+
+.ifelse-gpl-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 3px;
+  padding: 0.4rem 0.8rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.45);
+}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.ifelse-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.ifelse-reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .ifelse-nav { padding: 1rem 1.5rem; }
+  .ifelse-nav-links { display: none; }
+  .ifelse-hero { grid-template-columns: 1fr; min-height: auto; }
+  .ifelse-hero-left { padding: 6rem 1.5rem 3rem; }
+  .ifelse-hero-right { padding: 2rem 1.5rem 4rem; }
+  .ifelse-install-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .ifelse-modes-grid { grid-template-columns: 1fr; }
+  .ifelse-footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+  .ifelse-features { padding: 5rem 1.5rem; }
+  .ifelse-faq { padding: 5rem 1.5rem; }
+  .ifelse-install { padding: 4rem 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="ifelse-nav">
+  <a href="#" class="ifelse-nav-logo">
+    <span class="logo-if">if</span><span class="logo-else">else</span> Pages
+    <span class="ifelse-nav-badge">v1.0</span>
+  </a>
+  <ul class="ifelse-nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#modes">Modes</a></li>
+    <li><a href="#install">Install</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://github.com/Zulkaifriaz/ifelse" class="ifelse-nav-cta">GitHub →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="ifelse-hero">
+  <div class="ifelse-hero-left">
+    <div class="ifelse-hero-eyebrow">Free WordPress Plugin</div>
+    <h1 class="ifelse-hero-title">
+      Control<br>what<br>visitors <em>see.</em>
+    </h1>
+    <p class="ifelse-hero-desc">
+      A lightweight plugin to display Coming Soon, Maintenance, or Landing Page screens 
+      to visitors while you build. Admins always bypass — you keep working.
+    </p>
+    <div class="ifelse-hero-actions">
+      <a href="https://github.com/Zulkaifriaz/ifelse" class="ifelse-btn-primary">
+        ↓ Download Free
+      </a>
+      <a href="#features" class="ifelse-btn-secondary">
+        Explore Features
+      </a>
+    </div>
+    <div class="ifelse-hero-meta">
+      <div class="ifelse-hero-stat">
+        <strong>3</strong>
+        <span>Page Modes</span>
+      </div>
+      <div class="ifelse-hero-stat">
+        <strong>3</strong>
+        <span>Templates</span>
+      </div>
+      <div class="ifelse-hero-stat">
+        <strong>GPLv3</strong>
+        <span>License</span>
+      </div>
+      <div class="ifelse-hero-stat">
+        <strong>6.2+</strong>
+        <span>WP Required</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ifelse-hero-right">
+    <div class="ifelse-mockup">
+      <div class="ifelse-mockup-bar">
+        <div class="ifelse-mockup-dot"></div>
+        <div class="ifelse-mockup-dot"></div>
+        <div class="ifelse-mockup-dot"></div>
+        <div class="ifelse-mockup-url">yoursite.com</div>
+      </div>
+      <div class="ifelse-mockup-screen">
+        <div class="ifelse-mockup-screen-logo"><span>your</span>brand.</div>
+        <div class="ifelse-mockup-screen-title">Something great<br>is coming.</div>
+        <div class="ifelse-mockup-screen-sub">We're launching soon</div>
+        <div class="ifelse-mockup-countdown">
+          <div class="ifelse-mockup-count-block">
+            <span class="ifelse-mockup-count-num" id="ifelse-days">12</span>
+            <span class="ifelse-mockup-count-lbl">Days</span>
+          </div>
+          <div class="ifelse-mockup-count-block">
+            <span class="ifelse-mockup-count-num" id="ifelse-hrs">08</span>
+            <span class="ifelse-mockup-count-lbl">Hrs</span>
+          </div>
+          <div class="ifelse-mockup-count-block">
+            <span class="ifelse-mockup-count-num" id="ifelse-min">45</span>
+            <span class="ifelse-mockup-count-lbl">Min</span>
+          </div>
+          <div class="ifelse-mockup-count-block">
+            <span class="ifelse-mockup-count-num" id="ifelse-sec">22</span>
+            <span class="ifelse-mockup-count-lbl">Sec</span>
+          </div>
+        </div>
+      </div>
+      <div class="ifelse-mode-tabs">
+        <button class="ifelse-mode-tab active" onclick="switchTab(this,'coming-soon-mode')">Coming Soon</button>
+        <button class="ifelse-mode-tab" onclick="switchTab(this,'maintenance-mode')">Maintenance</button>
+        <button class="ifelse-mode-tab" onclick="switchTab(this,'landing-mode')">Landing Page</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="ifelse-divider"></div>
+
+<!-- FEATURES -->
+<section class="ifelse-features" id="features">
+  <div class="ifelse-features-header">
+    <div>
+      <div class="ifelse-section-label">Everything you need</div>
+      <h2 class="ifelse-features-title">Built for <em>real</em> workflows.</h2>
+    </div>
+    <p class="ifelse-features-sub">
+      Zero bloat, zero external APIs, zero tracking. Just clean, purposeful 
+      functionality that gets out of your way.
+    </p>
+  </div>
+
+  <div class="ifelse-features-grid">
+    <div class="ifelse-feature-card ifelse-reveal">
+      <div class="ifelse-feature-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="20" width="36" height="4" rx="2" fill="rgba(232,68,42,0.3)"/>
+          <circle cx="22" cy="22" r="6" fill="#e8442a"/>
+          <path d="M22 8V4M22 40V36M8 22H4M40 22H36" stroke="#e8442a" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3 class="ifelse-feature-title">One-Click Toggle</h3>
+      <p class="ifelse-feature-desc">Enable or disable the entire plugin with a single master switch. No fuss, no complex settings to undo.</p>
+    </div>
+
+    <div class="ifelse-feature-card ifelse-reveal" style="transition-delay:0.1s">
+      <div class="ifelse-feature-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="36" height="28" rx="3" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+          <rect x="8" y="12" width="28" height="6" rx="1.5" fill="#f5a623" opacity="0.6"/>
+          <rect x="8" y="22" width="18" height="3" rx="1.5" fill="rgba(255,255,255,0.4)"/>
+          <rect x="8" y="28" width="12" height="3" rx="1.5" fill="rgba(255,255,255,0.2)"/>
+        </svg>
+      </div>
+      <h3 class="ifelse-feature-title">3 Clean Templates</h3>
+      <p class="ifelse-feature-desc">Centered Minimal, Split Screen, and Dark Mode. Polished designs ready to use out of the box.</p>
+    </div>
+
+    <div class="ifelse-feature-card ifelse-reveal" style="transition-delay:0.2s">
+      <div class="ifelse-feature-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="18" r="8" stroke="#e8442a" stroke-width="2"/>
+          <path d="M8 36c0-6 6-10 14-10s14 4 14 10" stroke="rgba(255,255,255,0.4)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M30 12l4-4M34 8l4 4-4 4" stroke="#f5a623" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="ifelse-feature-title">Role Bypass</h3>
+      <p class="ifelse-feature-desc">Configurable per-role access. Admins always see the real site. Choose exactly which other roles can bypass.</p>
+    </div>
+
+    <div class="ifelse-feature-card ifelse-reveal" style="transition-delay:0.3s">
+      <div class="ifelse-feature-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="8" width="28" height="28" rx="3" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+          <path d="M14 22h16M22 14v16" stroke="#e8442a" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="32" cy="12" r="5" fill="#28c840"/>
+          <path d="M30 12l1.5 1.5L34 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h3 class="ifelse-feature-title">Logo Upload</h3>
+      <p class="ifelse-feature-desc">Upload your logo directly through the WordPress media library. No file paths, no FTP.</p>
+    </div>
+
+    <div class="ifelse-feature-card ifelse-reveal" style="transition-delay:0.4s">
+      <div class="ifelse-feature-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="14" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+          <path d="M22 12v10l6 6" stroke="#f5a623" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="22" cy="22" r="2.5" fill="#e8442a"/>
+        </svg>
+      </div>
+      <h3 class="ifelse-feature-title">Countdown Timer</h3>
+      <p class="ifelse-feature-desc">Set a launch date and show an auto-hiding countdown. It disappears automatically when the date expires.</p>
+    </div>
+
+    <div class="ifelse-feature-card ifelse-reveal" style="transition-delay:0.5s">
+      <div class="ifelse-feature-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 12h28M8 18h20M8 24h24M8 30h16" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round"/>
+          <rect x="26" y="22" width="14" height="14" rx="2" fill="#e8442a" opacity="0.3" stroke="#e8442a" stroke-width="1.5"/>
+          <path d="M29 29h8M29 32h5" stroke="#e8442a" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3 class="ifelse-feature-title">SEO Meta Fields</h3>
+      <p class="ifelse-feature-desc">Custom meta title and description for your page. Your holding page stays search-engine friendly.</p>
+    </div>
+
+    <div class="ifelse-feature-card ifelse-reveal" style="transition-delay:0.6s">
+      <div class="ifelse-feature-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="22" cy="22" r="12" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+          <path d="M10 22C10 22 14 10 22 10C30 10 34 22 34 22C34 22 30 34 22 34C14 34 10 22 10 22Z" stroke="#f5a623" stroke-width="1.5"/>
+          <circle cx="22" cy="16" r="3" fill="#e8442a"/>
+          <path d="M18 26c0 0 1-4 4-4s4 4 4 4" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h3 class="ifelse-feature-title">Translation Ready</h3>
+      <p class="ifelse-feature-desc">All strings use the <code style="font-size:0.8em;color:var(--accent2)">ifelse-pages</code> text domain. A .pot file is included for translators.</p>
+    </div>
+
+    <div class="ifelse-feature-card ifelse-reveal" style="transition-delay:0.7s">
+      <div class="ifelse-feature-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 32L16 14L22 26L26 20L36 32H8Z" fill="rgba(232,68,42,0.2)" stroke="#e8442a" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="34" cy="12" r="4" fill="#f5a623" opacity="0.8"/>
+        </svg>
+      </div>
+      <h3 class="ifelse-feature-title">Background Options</h3>
+      <p class="ifelse-feature-desc">Choose a background colour or upload a full background image. Full creative control over your page's look.</p>
+    </div>
+
+    <div class="ifelse-feature-card ifelse-reveal" style="transition-delay:0.8s">
+      <div class="ifelse-feature-icon">
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="10" width="32" height="24" rx="3" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+          <path d="M16 18L20 22L16 26" stroke="#e8442a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M23 26h6" stroke="#f5a623" stroke-width="2" stroke-linecap="round"/>
+          <path d="M6 34h32" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+        </svg>
+      </div>
+      <h3 class="ifelse-feature-title">Zero External APIs</h3>
+      <p class="ifelse-feature-desc">No calls home, no analytics, no ads, no tracking. Your visitors' data stays yours. Always.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODES -->
+<section class="ifelse-modes" id="modes">
+  <div class="ifelse-modes-inner">
+    <div class="ifelse-section-label" style="color:var(--accent)">Three modes</div>
+    <h2 class="ifelse-modes-title">The right screen for<br>every situation.</h2>
+    <p style="color:var(--muted);font-family:'Fraunces',serif;font-weight:300;max-width:560px;line-height:1.7;margin-top:0.5rem;">
+      Whether you're building from scratch, doing scheduled maintenance, or running a campaign — 
+      IfElse Pages has the right mode.
+    </p>
+
+    <div class="ifelse-modes-grid">
+      <div class="ifelse-mode-card ifelse-reveal">
+        <div class="ifelse-mode-card-top coming-soon">
+          <span style="font-family:'Fraunces',serif;font-style:italic;font-size:1.6rem;">Coming Soon</span>
+          <div class="mode-badge">200 OK</div>
+        </div>
+        <div class="ifelse-mode-card-body">
+          <h3 class="ifelse-mode-card-name">Coming Soon Mode</h3>
+          <p class="ifelse-mode-card-desc">Build anticipation before you launch. Show a polished holding page with optional countdown and collect interest from early visitors.</p>
+          <div class="ifelse-mode-card-tag">→ Sends HTTP 200</div>
+        </div>
+      </div>
+
+      <div class="ifelse-mode-card ifelse-reveal" style="transition-delay:0.15s">
+        <div class="ifelse-mode-card-top maintenance">
+          <span style="font-family:'Fraunces',serif;font-style:italic;font-size:1.6rem;">Maintenance</span>
+          <div class="mode-badge">503</div>
+        </div>
+        <div class="ifelse-mode-card-body">
+          <h3 class="ifelse-mode-card-name">Maintenance Mode</h3>
+          <p class="ifelse-mode-card-desc">For scheduled downtime. Sends a proper <code>503 Service Unavailable</code> header so search engines know you'll be back soon.</p>
+          <div class="ifelse-mode-card-tag">→ Sends HTTP 503</div>
+        </div>
+      </div>
+
+      <div class="ifelse-mode-card ifelse-reveal" style="transition-delay:0.3s">
+        <div class="ifelse-mode-card-top landing">
+          <span style="font-family:'Fraunces',serif;font-style:italic;font-size:1.6rem;">Landing Page</span>
+          <div class="mode-badge">200 OK</div>
+        </div>
+        <div class="ifelse-mode-card-body">
+          <h3 class="ifelse-mode-card-name">Landing Page Mode</h3>
+          <p class="ifelse-mode-card-desc">Display a full standalone landing page instead of your site. Perfect for campaigns, product launches, or single-focus marketing.</p>
+          <div class="ifelse-mode-card-tag">→ Sends HTTP 200</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTALL -->
+<div class="ifelse-install" id="install">
+  <div class="ifelse-install-inner">
+    <div class="ifelse-reveal">
+      <div class="ifelse-section-label" style="color:var(--accent2)">Quick Setup</div>
+      <h2 class="ifelse-install-title">Up and running in <em>minutes.</em></h2>
+      <ol class="ifelse-install-steps">
+        <li class="ifelse-install-step">
+          <span class="ifelse-install-step-text">Upload the <strong>ifelse-pages</strong> folder to your WordPress plugins directory at <code style="color:var(--accent2);font-size:0.85em">/wp-content/plugins/</code></span>
+        </li>
+        <li class="ifelse-install-step">
+          <span class="ifelse-install-step-text">Activate the plugin through the <strong>Plugins</strong> screen in your WordPress admin dashboard.</span>
+        </li>
+        <li class="ifelse-install-step">
+          <span class="ifelse-install-step-text">Go to <strong>Settings → IfElse Pages</strong> to configure your mode, templates, and content.</span>
+        </li>
+        <li class="ifelse-install-step">
+          <span class="ifelse-install-step-text">Flip the master <strong>ON/OFF toggle</strong> and you're live. Visitors see your page; you see your site.</span>
+        </li>
+      </ol>
+
+      <div style="margin-top:2.5rem;">
+        <a href="https://github.com/Zulkaifriaz/ifelse" class="ifelse-btn-primary">
+          ↓ Download from GitHub
+        </a>
+      </div>
+    </div>
+
+    <div class="ifelse-code-block ifelse-reveal" style="transition-delay:0.2s">
+      <div class="ifelse-code-header">
+        <div class="ifelse-code-dot"></div>
+        <div class="ifelse-code-dot"></div>
+        <div class="ifelse-code-dot"></div>
+        <span>wp-cli / terminal</span>
+      </div>
+      <div class="ifelse-code-body">
+        <div class="ifelse-code-line">
+          <span class="ifelse-code-num">1</span>
+          <span class="ifelse-code-text"><span class="c-comment"># Clone the repo</span></span>
+        </div>
+        <div class="ifelse-code-line">
+          <span class="ifelse-code-num">2</span>
+          <span class="ifelse-code-text"><span class="c-key">git</span> clone <span class="c-path">https://github.com/Zulkaifriaz/ifelse</span></span>
+        </div>
+        <div class="ifelse-code-line">
+          <span class="ifelse-code-num">3</span>
+          <span class="ifelse-code-text">&nbsp;</span>
+        </div>
+        <div class="ifelse-code-line">
+          <span class="ifelse-code-num">4</span>
+          <span class="ifelse-code-text"><span class="c-comment"># Or via WP-CLI</span></span>
+        </div>
+        <div class="ifelse-code-line">
+          <span class="ifelse-code-num">5</span>
+          <span class="ifelse-code-text"><span class="c-key">wp</span> plugin install <span class="c-val">ifelse-pages</span></span>
+        </div>
+        <div class="ifelse-code-line">
+          <span class="ifelse-code-num">6</span>
+          <span class="ifelse-code-text"><span class="c-key">wp</span> plugin activate <span class="c-val">ifelse-pages</span></span>
+        </div>
+        <div class="ifelse-code-line">
+          <span class="ifelse-code-num">7</span>
+          <span class="ifelse-code-text">&nbsp;</span>
+        </div>
+        <div class="ifelse-code-line">
+          <span class="ifelse-code-num">8</span>
+          <span class="ifelse-code-text"><span class="c-comment"># Navigate to settings</span></span>
+        </div>
+        <div class="ifelse-code-line">
+          <span class="ifelse-code-num">9</span>
+          <span class="ifelse-code-text"><span class="c-nav">Settings</span> → <span class="c-val">IfElse Pages</span> → <span class="c-key">Configure</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="ifelse-faq" id="faq">
+  <div class="ifelse-section-label">Common questions</div>
+  <h2 class="ifelse-faq-title">FAQ</h2>
+
+  <div class="ifelse-faq-list">
+    <div class="ifelse-faq-item">
+      <button class="ifelse-faq-question" onclick="toggleFaq(this)">
+        Will administrators always see the real site?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="ifelse-faq-answer">
+        Yes. Administrators bypass the screen by default. You can adjust which additional roles also bypass it in the Settings tab. Logged-in admins will never be redirected to the holding page.
+      </div>
+    </div>
+    <div class="ifelse-faq-item">
+      <button class="ifelse-faq-question" onclick="toggleFaq(this)">
+        Does this affect the REST API or wp-admin?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="ifelse-faq-answer">
+        No. The intercept only runs on standard front-end page loads. Your REST API endpoints, wp-admin, and wp-login.php remain fully accessible at all times.
+      </div>
+    </div>
+    <div class="ifelse-faq-item">
+      <button class="ifelse-faq-question" onclick="toggleFaq(this)">
+        What HTTP status code does Maintenance Mode send?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="ifelse-faq-answer">
+        Maintenance Mode sends a <code>503 Service Unavailable</code> header. Coming Soon and Landing Page modes both send <code>200 OK</code>. This is the SEO-correct behaviour for each scenario.
+      </div>
+    </div>
+    <div class="ifelse-faq-item">
+      <button class="ifelse-faq-question" onclick="toggleFaq(this)">
+        Is the plugin translation ready?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="ifelse-faq-answer">
+        Yes. All strings use the <code>ifelse-pages</code> text domain and a <code>.pot</code> file is included in <code>/languages/</code>. Ready for any translation workflow or plugin like Loco Translate.
+      </div>
+    </div>
+    <div class="ifelse-faq-item">
+      <button class="ifelse-faq-question" onclick="toggleFaq(this)">
+        Are there any external API calls or tracking?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="ifelse-faq-answer">
+        Absolutely none. IfElse Pages makes zero external API calls, contains no analytics, no ads, and no tracking of any kind. Your data and your visitors' data stay entirely within your server.
+      </div>
+    </div>
+    <div class="ifelse-faq-item">
+      <button class="ifelse-faq-question" onclick="toggleFaq(this)">
+        Where can I get support?
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="ifelse-faq-answer">
+        Reach out via email at <a href="mailto:mail@zulkaif.com" style="color:var(--accent)">mail@zulkaif.com</a> or visit <a href="https://zulkaif.com" style="color:var(--accent)">zulkaif.com</a>. You can also open an issue on the <a href="https://github.com/Zulkaifriaz/ifelse" style="color:var(--accent)">GitHub repository</a>.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ifelse-footer">
+  <div class="ifelse-footer-inner">
+    <div class="ifelse-footer-top">
+      <div class="ifelse-footer-brand">
+        <h2><span>if</span>else Pages</h2>
+        <p>A lightweight WordPress plugin for Coming Soon, Maintenance, and Landing Page screens. Free, open source, zero bloat.</p>
+      </div>
+
+      <div class="ifelse-footer-col">
+        <h4>Links</h4>
+        <ul>
+          <li><a href="https://github.com/Zulkaifriaz/ifelse">GitHub Repository</a></li>
+          <li><a href="https://zulkaif.com">Author Website</a></li>
+          <li><a href="mailto:mail@zulkaif.com">Contact Author</a></li>
+          <li><a href="https://www.gnu.org/licenses/gpl-3.0.html">GPLv3 License</a></li>
+        </ul>
+      </div>
+
+      <div class="ifelse-footer-col">
+        <h4>Quick Info</h4>
+        <ul>
+          <li><a href="#">Version 1.0.0</a></li>
+          <li><a href="#">Requires WP 6.2+</a></li>
+          <li><a href="#">PHP 7.4+</a></li>
+          <li><a href="#">By Zulkaif Riaz</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="ifelse-footer-bottom">
+      <p>© 2024 <a href="https://zulkaif.com">Zulkaif Riaz</a>. Plugin URI: <a href="https://zulkaif.com/ifelse.html">zulkaif.com/ifelse.html</a></p>
+      <div class="ifelse-gpl-badge">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM7 0a7 7 0 110 14A7 7 0 017 0z" fill="rgba(255,255,255,0.4)"/><path d="M6 4h2v2H6zM6 7h2v3H6z" fill="rgba(255,255,255,0.4)"/></svg>
+        Licensed under GPLv3
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ===== IFELSE PAGES – HOME SCRIPTS (ifelse-home-v1) ===== */
+
+// ─── COUNTDOWN (demo) ───
+(function() {
+  const target = new Date(Date.now() + 12 * 86400000 + 8 * 3600000 + 45 * 60000);
+  function update() {
+    const diff = Math.max(0, target - Date.now());
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    const pad = n => String(n).padStart(2,'0');
+    const dEl = document.getElementById('ifelse-days');
+    const hEl = document.getElementById('ifelse-hrs');
+    const mEl = document.getElementById('ifelse-min');
+    const sEl = document.getElementById('ifelse-sec');
+    if (dEl) dEl.textContent = pad(d);
+    if (hEl) hEl.textContent = pad(h);
+    if (mEl) mEl.textContent = pad(m);
+    if (sEl) sEl.textContent = pad(s);
+  }
+  update();
+  setInterval(update, 1000);
+})();
+
+// ─── TAB SWITCHER ───
+function switchTab(btn, mode) {
+  document.querySelectorAll('.ifelse-mode-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  // Could swap mockup content in a full implementation
+}
+
+// ─── FAQ TOGGLE ───
+function toggleFaq(btn) {
+  const answer = btn.nextElementSibling;
+  const isOpen = btn.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.ifelse-faq-question').forEach(q => {
+    q.classList.remove('open');
+    q.nextElementSibling.classList.remove('open');
+  });
+  if (!isOpen) {
+    btn.classList.add('open');
+    answer.classList.add('open');
+  }
+}
+
+// ─── SCROLL REVEAL ───
+const ifelse_observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      ifelse_observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.ifelse-reveal').forEach(el => ifelse_observer.observe(el));
+</script>
+</body>
+</html>
