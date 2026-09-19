@@ -1022,56 +1022,126 @@
                             <div class="contact-inner">
                                 <div class="contact-form">
                                     <div id="form-messages" class="error"></div>
-                                    <form class="tmp-dynamic-form" id="contact-form" method="POST" action="https://formspree.io/f/xkgjyblz">
-                                        <div class="contact-form-wrapper row">
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <input class="input-field" name="name" id="contact-name" placeholder="Your Name" type="text" required>
-                                                </div>
-                                            </div>
+<form class="tmp-dynamic-form"
+      id="contact-form"
+      method="POST"
+      action="https://formspree.io/f/xkgjyblz">
 
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <input class="input-field" id="contact-phone" placeholder="Phone Number" type="number" required>
-                                                </div>
-                                            </div>
+    <div class="contact-form-wrapper row">
 
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <input class="input-field" id="contact-email" name="email" placeholder="Your Email" type="email" required>
-                                                </div>
-                                            </div>
+        <!-- Name -->
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input
+                    class="input-field"
+                    name="name"
+                    id="contact-name"
+                    placeholder="Your Name"
+                    type="text"
+                    required>
+            </div>
+        </div>
 
-                                            <div class="col-lg-6">
-                                                <div class="form-group">
-                                                    <input class="input-field" type="text" id="subject" name="subject" placeholder="Subject">
-                                                </div>
-                                            </div>
+        <!-- Phone -->
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input
+                    class="input-field"
+                    name="phone"
+                    id="contact-phone"
+                    placeholder="Phone Number"
+                    type="tel"
+                    autocomplete="tel"
+                    required>
+            </div>
+        </div>
 
-                                            <div class="col-lg-12">
-                                                <div class="form-group">
-                                                    <textarea class="input-field" placeholder="Your Message" name="message" id="contact-message" required></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="cf-turnstile" data-sitekey="0x4AAAAAACHdoA8LnEaU1WCO"></div>
-										<input type="hidden" name="cf-turnstile-response">
+        <!-- Email -->
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input
+                    class="input-field"
+                    id="contact-email"
+                    name="email"
+                    placeholder="Your Email"
+                    type="email"
+                    autocomplete="email"
+                    required>
+            </div>
+        </div>
 
-                                            <div class="col-lg-12">
-                                                <div class="tmp-button-here">
-                                                    <button class="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon">
-                                                        <span class="icon-reverse-wrapper">
-                                                <span class="btn-text">Appointment Now</span>
-                                                        <span class="btn-hack"></span>
-                                                        <img src="assets/images/button/btg-bg.svg" alt="" class="btn-bg">
-                                                        <img src="assets/images/button/btg-bg-2.svg" alt="" class="btn-bg-hover">
-                                                        <span class="btn-icon"><i class="ffa-sharp fa-regular fa-arrow-right"></i></span>
-                                                        <span class="btn-icon"><i class="ffa-sharp fa-regular fa-arrow-right"></i></span>
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
+        <!-- Subject -->
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input
+                    class="input-field"
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    placeholder="Subject">
+            </div>
+        </div>
+
+        <!-- Message -->
+        <div class="col-lg-12">
+            <div class="form-group">
+                <textarea
+                    class="input-field"
+                    placeholder="Your Message"
+                    name="message"
+                    id="contact-message"
+                    required></textarea>
+            </div>
+        </div>
+
+        <!-- Cloudflare Turnstile -->
+        <div class="col-lg-12">
+            <div
+                class="cf-turnstile"
+                data-sitekey="0x4AAAAAACHdoA8LnEaU1WCO">
+            </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="col-lg-12">
+            <div class="tmp-button-here">
+                <button
+                    type="submit"
+                    class="tmp-btn hover-icon-reverse btn-border btn-md tmp-modern-button radius-round download-icon">
+
+                    <span class="icon-reverse-wrapper">
+
+                        <span class="btn-text">
+                            Appointment Now
+                        </span>
+
+                        <span class="btn-hack"></span>
+
+                        <img
+                            src="assets/images/button/btg-bg.svg"
+                            alt=""
+                            class="btn-bg">
+
+                        <img
+                            src="assets/images/button/btg-bg-2.svg"
+                            alt=""
+                            class="btn-bg-hover">
+
+                        <span class="btn-icon">
+                            <i class="ffa-sharp fa-regular fa-arrow-right"></i>
+                        </span>
+
+                        <span class="btn-icon">
+                            <i class="ffa-sharp fa-regular fa-arrow-right"></i>
+                        </span>
+
+                    </span>
+                </button>
+            </div>
+        </div>
+
+    </div>
+</form>
                                 </div>
                             </div>
                         </div>
