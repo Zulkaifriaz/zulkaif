@@ -25,13 +25,13 @@
                             <h5 class="ft-title">Quick Link</h5>
                             <ul class="ft-link tmp-link-animation">
                                 <li>
-                                    <a href="about.html">About Me</a>
+                                    <a href="/about">About Me</a>
                                 </li>
                                 <li>
-                                    <a href="index.php#services">Service</a>
+                                    <a href="/#services">Service</a>
                                 </li>
                                 <li>
-                                    <a href="contact.html">Contact</a>
+                                    <a href="/contact">Contact</a>
                                 </li>
                                 
                             </ul>
@@ -68,9 +68,9 @@
                             </script> | All Rights Reserved
                         </p>
                         <ul class="tmp-link-animation">
-                            <li><a href="terms.html">Terms & Condition</a></li>
-                            <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                            <li><a href="contact.html">Contact Us</a></li>
+                            <li><a href="/terms">Terms & Condition</a></li>
+                            <li><a href="/privacy-policy">Privacy Policy</a></li>
+                            <li><a href="/contact">Contact Us</a></li>
                         </ul>
                     </div>
                 </div>

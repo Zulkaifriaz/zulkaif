@@ -78,10 +78,10 @@
                 <div class="social-wrapper mt--40">
                     <span class="subtitle">find with me</span>
                     <div class="social-link">
-                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="https://www.linkedin.com/in/zulkaifriaz"><i class="fa-brands fa-linkedin-in"></i></a>
+                                <a href="https://github.com/Zulkaifriaz/"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://profiles.wordpress.org/zulkaifriaz/"><i class="fa-brands fa-wordpress"></i></a>
+                                <a href="https://web.facebook.com/ThekaifRiaz"><i class="fa-brands fa-facebook-f"></i></a>
                     </div>
                 </div>
                 <!-- end -->
