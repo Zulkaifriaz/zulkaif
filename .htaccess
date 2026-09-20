@@ -1,7 +1,4 @@
-# ==============================================================================
-# Block public access to sensitive files/folders
-# ==============================================================================
-
+```apache
 RewriteEngine On
 
 # ------------------------------------------------------------------------------
@@ -17,7 +14,6 @@ ErrorDocument 404 /404.html
     Require all denied
 </FilesMatch>
 
-# Block common sensitive files
 <FilesMatch "^(composer\.(json|lock)|package(-lock)?\.json|yarn\.lock|phpunit\.xml|\.gitignore|\.htaccess|\.htpasswd)$">
     Require all denied
 </FilesMatch>
@@ -30,19 +26,17 @@ RewriteRule ^(?:\.git|\.svn|\.hg|vendor|node_modules|storage|private|backup|back
 
 
 # ------------------------------------------------------------------------------
-# Redirect URLs containing .html to clean URLs
+# Hide index.php from the public URL
+# /index.php -> /
 # ------------------------------------------------------------------------------
-RewriteCond %{THE_REQUEST} \s/+(.+?)\.html(?:[\s?]|$) [NC]
-RewriteRule ^(.+)\.html$ /$1 [R=301,L]
+RewriteCond %{THE_REQUEST} \s/+index\.php(?:[?\s]|$) [NC]
+RewriteRule ^index\.php$ / [R=301,L]
 
 
 # ------------------------------------------------------------------------------
-# Internally load .html files for clean URLs
+# Internally serve index.php for /
 # ------------------------------------------------------------------------------
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME}.html -f
-RewriteRule ^(.+?)/?$ $1.html [L]
+RewriteRule ^$ index.php [L]
 
 
 # ------------------------------------------------------------------------------
@@ -50,23 +44,13 @@ RewriteRule ^(.+?)/?$ $1.html [L]
 # ------------------------------------------------------------------------------
 <IfModule mod_headers.c>
 
-    # Force HTTPS for one year
     Header always set Strict-Transport-Security "max-age=31536000"
-
-    # Prevent MIME sniffing
     Header always set X-Content-Type-Options "nosniff"
-
-    # Prevent clickjacking
     Header always set X-Frame-Options "DENY"
-
-    # Limit referrer information
     Header always set Referrer-Policy "strict-origin-when-cross-origin"
-
-    # Disable unnecessary browser features
     Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
 
-    # Basic Content Security Policy
-    # Adjust this if your site uses external scripts, fonts, APIs, etc.
     Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https:; script-src 'self' https:; font-src 'self' data: https:; connect-src 'self' https:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
 
 </IfModule>
+```
